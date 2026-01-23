@@ -9,7 +9,7 @@ public class BusTransition : MonoBehaviour
 
     RectTransform rect;
 
-    public const float timeTravel = 5f;
+    public const float timeTravel = 2f;
     float elapsed;
     int travel;
 
