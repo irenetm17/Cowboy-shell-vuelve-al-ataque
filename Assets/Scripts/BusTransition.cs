@@ -1,11 +1,15 @@
 using System;
 using System.Diagnostics;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class BusTransition : MonoBehaviour
 {
     public RectTransform[] points;
+    public TMP_Text text;
+    public string[] destinos;
 
     RectTransform rect;
 
@@ -21,7 +25,7 @@ public class BusTransition : MonoBehaviour
     void Start()
     {
         //Leer un valor de un script que Angel dice que existirá
-        travel = 0;
+        travel = 2;
         // Position at the first point
         rect.localPosition = points[travel].localPosition;
 
@@ -36,6 +40,8 @@ public class BusTransition : MonoBehaviour
 
         //Init values:
         elapsed = 0;
+        text.text += destinos[travel];
+        this.transform.localScale = new Vector3(this.transform.localScale.x, -transform.localScale.y, 0);
     }
 
     public void Update()
