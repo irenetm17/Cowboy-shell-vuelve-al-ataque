@@ -91,16 +91,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _background: {fileID: 8402737902524890233}
   _text: {fileID: 2552455846525325961}
-  _normalTextColor: {r: 1, g: 1, b: 1, a: 1}
+  _normalTextColor: {r: 0, g: 0, b: 0, a: 1}
   _normalBackgroundColor: {r: 1, g: 1, b: 1, a: 1}
+  _normalSize: 1
   _nextTextColor: {r: 1, g: 0.895329, b: 0.6179246, a: 1}
   _nextBackgroundColor: {r: 1, g: 0.68113244, b: 0, a: 1}
+  _nextSize: 1.3
   _goodTextColor: {r: 0.53901213, g: 1, b: 0.4481132, a: 1}
   _goodBackgroundColor: {r: 0.16470589, g: 1, b: 0, a: 1}
+  _goodSize: 1.2
   _badTextColor: {r: 1, g: 0.6179246, b: 0.6179246, a: 1}
   _badBackgroundColor: {r: 1, g: 0, b: 0, a: 1}
-  _offTextColor: {r: 0.6792453, g: 0.6792453, b: 0.6792453, a: 1}
+  _badSize: 1
+  _offTextColor: {r: 0.2830189, g: 0.2830189, b: 0.2830189, a: 1}
   _offBackgroundColor: {r: 0.13207549, g: 0.13207549, b: 0.13207549, a: 1}
+  _offSize: 0.7
 --- !u!1 &8429540403697414136
 GameObject:
   m_ObjectHideFlags: 0

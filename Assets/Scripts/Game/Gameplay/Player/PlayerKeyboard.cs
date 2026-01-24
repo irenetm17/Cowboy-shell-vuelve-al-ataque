@@ -24,7 +24,12 @@ public class PlayerKeyboard : MonoBehaviour
 
     [SerializeField] private InputActionReference[] _keyActions;
 
-    public KeyCode _CurrentKey { get; private set; }
+    public static KeyCode _CurrentKey { get; private set; }
+
+    private void Awake()
+    {
+        _CurrentKey = KeyCode.None;
+    }
 
     private void Update()
     {
