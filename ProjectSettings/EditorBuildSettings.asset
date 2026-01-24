@@ -12,7 +12,7 @@ EditorBuildSettings:
     path: Assets/Scenes/BusTransition.unity
     guid: 1488225489592c445be252dbb5365062
   - enabled: 1
-    path: Assets/Scenes/Game2.unity
+    path: Assets/Scenes/Game.unity
     guid: 849db420b50308b4aa05b78f22553597
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: d02236b32385f964ab6baf716ba06228, type: 2}
