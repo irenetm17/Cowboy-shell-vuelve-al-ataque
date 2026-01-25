@@ -7,6 +7,7 @@ public class Director : MonoBehaviour
 {
     [SerializeField] private Player _player;
     [SerializeField] private Enemy _enemy;
+    [SerializeField] private EnemySpecial _enemySpecial;
     [SerializeField] private UltimateGameManager _ultiManager;
     [Space]
     [SerializeField] private KeySequence _attackSequence;
@@ -25,6 +26,8 @@ public class Director : MonoBehaviour
     [Space]
     [SerializeField] private int _keySequencesLength;
     [SerializeField] private int _timerMaxTime;
+    [SerializeField] private int _minSpecialTime;
+    [SerializeField] private int _maxSpecialTime;
 
     private bool _isActionSequenceOn;
     private bool _isReadingKeys;
@@ -58,6 +61,7 @@ public class Director : MonoBehaviour
 
         CreateNewSequences();
         StartCountdown();
+        StartCoroutine(DoSpecial_EVENT());
 
         _timerParent.SetActive(true);
         _playerActions.SetActive(true);
@@ -226,5 +230,15 @@ public class Director : MonoBehaviour
         _ultiManager.StartGame();
 
         yield return new WaitForSeconds(_ultiManager.N_TIME);
+    }
+
+    private IEnumerator DoSpecial_EVENT()
+    {
+        float time = Random.Range(_minSpecialTime, _maxSpecialTime);
+
+        yield return new WaitForSeconds(time);
+
+        _enemySpecial.Play(_isUltiEnabled);
+        StartCoroutine(DoSpecial_EVENT());
     }
 }
