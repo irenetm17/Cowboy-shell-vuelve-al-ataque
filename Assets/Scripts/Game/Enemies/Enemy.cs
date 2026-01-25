@@ -3,6 +3,9 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    [SerializeField] private GameObject _healthBoxPrefab;
+    [SerializeField] private Transform _healthBoxesParent;
+    [Space]
     [SerializeField] private Animator _animator;
     [SerializeField] private TMP_Text _text;
     [SerializeField] private GameObject _chargingParticles;
@@ -11,6 +14,10 @@ public class Enemy : MonoBehaviour
     [SerializeField] private string[] _chargeMessages;
     [Space]
     [SerializeField] private int _health;
+    [SerializeField] private float _healthBarHeight;
+    [SerializeField] private Transform _healthBarTarget;
+
+    private GameObject[] _healthBoxes;
 
     public int _CurrentAction {  get; private set; }
     public int _AttackPower { get; private set; }
@@ -19,13 +26,26 @@ public class Enemy : MonoBehaviour
     {
         RestartAttackPower();
         _chargingParticles.SetActive(false);
+
+        float offset = _health * 0.5f;
+        _healthBoxes = new GameObject[_health];
+        const int _BOX_SEPARATION = 32;
+
+        for (int i = 0; i < _health; i++)
+        {
+            _healthBoxes[i] = Instantiate(_healthBoxPrefab, _healthBoxesParent);
+            _healthBoxes[i].transform.localPosition = _BOX_SEPARATION * (-i + offset) * Vector3.left;
+        }
+    }
+
+    private void Update()
+    {
+        _healthBoxesParent.position = _healthBarTarget.position + _healthBarHeight * Vector3.up;
     }
 
     public void SetAction()
     {
         _CurrentAction = Random.Range(0, 2);
-
-        _animator.SetTrigger("Angry");
 
         if (_CurrentAction == 0) _text.SetText(_attackMessages[Random.Range(0, _attackMessages.Length)]);
         else if (_CurrentAction == 1)
@@ -43,6 +63,7 @@ public class Enemy : MonoBehaviour
     public void TakeDamage(int damage)
     {
         _health -= damage;
+        UpdateHealth();
         _animator.SetTrigger("Hit");
     }
 
@@ -57,4 +78,9 @@ public class Enemy : MonoBehaviour
     }
 
     public void DisableChargingParticles() { _chargingParticles.SetActive(false); }
+
+    private void UpdateHealth()
+    {
+        for (int i = 0; i < _healthBoxes.Length; i++) _healthBoxes[i].SetActive(i < _health);
+    }
 }

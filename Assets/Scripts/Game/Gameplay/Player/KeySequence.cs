@@ -34,28 +34,25 @@ public class KeySequence : MonoBehaviour
         float keyScale = length > 4 ? 1 - _EXTRA_SPACE_SCALE_MULTIPLIER * (length - 4) : 1;
 
         int keyId = -1;
+        KeyCode firstSeqKey = firstSequence == null ? KeyCode.None : firstSequence[0].key;
+        KeyCode secondSeqKey = secondSequence == null ? KeyCode.None : secondSequence[0].key;
         for (int i = 0; i < length; i++)
         {
             int newKeyId = 0;
             do
             {
                 newKeyId = Random.Range(0, PlayerKeyboard._KeyList.Length);
-            } while (newKeyId == keyId);
+            } while (newKeyId == keyId || PlayerKeyboard._KeyList[newKeyId] == firstSeqKey || PlayerKeyboard._KeyList[newKeyId] == secondSeqKey);
 
             keyId = newKeyId;
             GameObject obj = Instantiate(_keyPrefab, _container);
             obj.transform.localPosition = _KEY_OBJECTS_SEPARATION * keyScale * (movingRight ? i : i - length) * Vector3.right;
+            obj.name = PlayerKeyboard._KeyList[newKeyId].ToString();
 
             KeyObject key = obj.GetComponent<KeyObject>();
             key.SetLetter(PlayerKeyboard._KeyList[newKeyId], keyScale);
 
             _CurrentSequence[i] = new Key(PlayerKeyboard._KeyList[keyId], key);
-
-            if (i == 0 && firstSequence != null)
-            {
-                if (_CurrentSequence[0].key == firstSequence[0].key) i = 0;
-                else if (secondSequence != null) if (_CurrentSequence[0].key == secondSequence[0].key) i = 0;
-            }
         }
 
         EnableSequence();

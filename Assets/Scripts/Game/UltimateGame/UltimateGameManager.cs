@@ -12,12 +12,18 @@ public class UltimateGameManager : MonoBehaviour
     public GameObject background;
     public GameObject background_time;
 
+    private void Awake()
+    {
+        background.SetActive(false);
+        background_time.SetActive(false);
+    }
+
     public float speedAppear = 10f;
     public float speedDisappear = 10f;
 
     public int N_SLIDERS = 3;
     public float N_TIME = 10f;
-    public float time;
+    private float time;
     int sliderDone;
     bool gameStarted;
     public void StartGame()
@@ -37,9 +43,9 @@ public class UltimateGameManager : MonoBehaviour
     bool InsideMargins(Vector2 p, float margin)
     {
         return p.x >= margin &&
-               p.x <= 1920 - margin &&
+               p.x <= Screen.width - margin &&
                p.y >= margin &&
-               p.y <= 1080 - margin;
+               p.y <= Screen.height - margin;
     }
 
     public void Randomize(GameObject obj)

@@ -7,10 +7,14 @@ public class Director : MonoBehaviour
 {
     [SerializeField] private Player _player;
     [SerializeField] private Enemy _enemy;
+    [SerializeField] private UltimateGameManager _ultiManager;
     [Space]
     [SerializeField] private KeySequence _attackSequence;
     [SerializeField] private KeySequence _defenseSequence;
     [SerializeField] private KeySequence _ultiSequence;
+    [Space]
+    [SerializeField] private GameObject _playerActions;
+    [SerializeField] private GameObject _enemyText;
     [Space]
     [SerializeField] private GameObject _timerParent;
     [SerializeField] private Image _countdownSlider;
@@ -26,9 +30,13 @@ public class Director : MonoBehaviour
     private bool _isReadingKeys;
     private bool _isUltiEnabled;
 
-    private void Start()
+    private IEnumerator Start()
     {
-        _isUltiEnabled = true;
+        _timerParent.SetActive(false);
+        _playerActions.SetActive(false);
+        _enemyText.SetActive(false);
+
+        yield return new WaitForSeconds(2);
 
         StartActionSequence();
     }
@@ -45,10 +53,15 @@ public class Director : MonoBehaviour
         StopAllCoroutines();
 
         _enemy.SetAction();
-        _isUltiEnabled = _player._Combo >= 4;
+        //_isUltiEnabled = _player._Combo >= 4;
+        _isUltiEnabled = true;
 
         CreateNewSequences();
         StartCountdown();
+
+        _timerParent.SetActive(true);
+        _playerActions.SetActive(true);
+        _enemyText.SetActive(true);
 
         _isActionSequenceOn = true;
         _isReadingKeys = true;
@@ -139,11 +152,15 @@ public class Director : MonoBehaviour
     private void EndActionSequence(int playerState)
     {
         _timerParent.SetActive(false);
+        _playerActions.SetActive(false);
+        _enemyText.SetActive(false);
 
         _isActionSequenceOn = false;
         _isReadingKeys = false;
 
-        PlayActionResult(playerState);
+        StopAllCoroutines();
+
+        if (playerState == 2) StartCoroutine(UltiAction_EVENT()); else PlayActionResult(playerState);
     }
 
     private void PlayActionResult(int playerState)
@@ -175,6 +192,7 @@ public class Director : MonoBehaviour
             switch (playerState)
             {
                 case 0:
+                    _player.Attack();
                     _enemy.TakeDamage(1);
                     break;
 
@@ -198,8 +216,15 @@ public class Director : MonoBehaviour
 
     private IEnumerator ActionEventCooldown_EVENT()
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(2.5f);
 
         StartActionSequence();
+    }
+
+    private IEnumerator UltiAction_EVENT()
+    {
+        _ultiManager.StartGame();
+
+        yield return new WaitForSeconds(_ultiManager.N_TIME);
     }
 }
