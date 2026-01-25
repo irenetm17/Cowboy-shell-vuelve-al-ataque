@@ -40,14 +40,6 @@ public class UltimateGameManager : MonoBehaviour
 
     }
 
-    bool InsideMargins(Vector2 p, float margin)
-    {
-        return p.x >= margin &&
-               p.x <= Screen.width - margin &&
-               p.y >= margin &&
-               p.y <= Screen.height - margin;
-    }
-
     public void Randomize(GameObject obj)
     {
         RectTransform start = obj.transform.GetChild(0).GetComponent<RectTransform>();
@@ -58,24 +50,13 @@ public class UltimateGameManager : MonoBehaviour
         Vector2 startPos;
         float angle;
         float length;
-        Vector2 dir;
-        Vector2 endPoint;
 
-        do
-        {
-            startPos = new Vector2(
+        startPos = new Vector2(
                 Random.Range(-Screen.width/2 + margin, Screen.width/2 - margin),
                 Random.Range(-Screen.height/2 + margin, Screen.height/2 - margin)
-            );
-
-            angle = Random.Range(0f, 360f);
-            length = Random.Range(300f, 600f);
-
-            dir = Quaternion.Euler(0f, 0f, angle) * Vector2.right;
-
-            endPoint = startPos + dir * length;
-
-        } while (!InsideMargins(endPoint, margin));
+        );
+        angle = Random.Range(0f, 360f);
+        length = Random.Range(300f, 500f);
 
         start.anchoredPosition = startPos;
         start.localRotation = Quaternion.Euler(0f, 0f, angle);
@@ -135,8 +116,8 @@ public class UltimateGameManager : MonoBehaviour
 
         rt.localScale = Vector3.one;
         cg.alpha = 1f;
-        obj.SetActive(true);
         Randomize(obj);
+        obj.SetActive(true);
         CircleDrag cd = obj.GetComponentInChildren<CircleDrag>();
         cd.ultimate = this;
         cd.RecalculateLine();
