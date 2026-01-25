@@ -64,8 +64,8 @@ public class UltimateGameManager : MonoBehaviour
         do
         {
             startPos = new Vector2(
-                Random.Range(margin, 1920 - margin),
-                Random.Range(margin, 1080 - margin)
+                Random.Range(-Screen.width/2 + margin, Screen.width/2 - margin),
+                Random.Range(-Screen.height/2 + margin, Screen.height/2 - margin)
             );
 
             angle = Random.Range(0f, 360f);
