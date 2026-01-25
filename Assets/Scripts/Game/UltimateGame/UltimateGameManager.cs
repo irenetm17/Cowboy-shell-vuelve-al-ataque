@@ -53,7 +53,7 @@ public class UltimateGameManager : MonoBehaviour
         RectTransform start = obj.transform.GetChild(0).GetComponent<RectTransform>();
         RectTransform parent = start.parent as RectTransform;
 
-        float margin = 200f;
+        float margin = 600f;
 
         Vector2 startPos;
         float angle;
