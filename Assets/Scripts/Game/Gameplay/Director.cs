@@ -28,6 +28,10 @@ public class Director : MonoBehaviour
     [SerializeField] private int _timerMaxTime;
     [SerializeField] private int _minSpecialTime;
     [SerializeField] private int _maxSpecialTime;
+    [Space]
+    [SerializeField] private int _level;
+    [SerializeField] private string _sceneName;
+
 
     private bool _isActionSequenceOn;
     private bool _isReadingKeys;
@@ -214,6 +218,8 @@ public class Director : MonoBehaviour
                     break;
             }
         }
+
+        if (_enemy._Health <= 0) Save.Complete(_level, _sceneName);
 
         StartCoroutine(ActionEventCooldown_EVENT());
     }

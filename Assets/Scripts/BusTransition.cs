@@ -25,7 +25,7 @@ public class BusTransition : MonoBehaviour
     void Start()
     {
         //Leer un valor de un script que Angel dice que existirá
-        travel = 2;
+        travel = Save._Progress;
         // Position at the first point
         rect.localPosition = points[travel].localPosition;
 

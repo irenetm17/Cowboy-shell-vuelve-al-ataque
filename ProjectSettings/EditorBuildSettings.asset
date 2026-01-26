@@ -12,8 +12,17 @@ EditorBuildSettings:
     path: Assets/Scenes/BusTransition.unity
     guid: 1488225489592c445be252dbb5365062
   - enabled: 1
-    path: Assets/Scenes/Game.unity
-    guid: 849db420b50308b4aa05b78f22553597
+    path: Assets/Scenes/Peacock.unity
+    guid: e73daeef397c6d24d9fab75156bbae7b
+  - enabled: 1
+    path: Assets/Scenes/DrawingsWin.unity
+    guid: 3ebdb40f52abc5d498c5db07dfa4ab67
+  - enabled: 1
+    path: Assets/Scenes/PeacockWin.unity
+    guid: 170b86198f75e614fb34c8224b81b35b
+  - enabled: 1
+    path: Assets/Scenes/BearWin.unity
+    guid: 0d64f3a5be62b904085bbd72c4105335
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: d02236b32385f964ab6baf716ba06228, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}

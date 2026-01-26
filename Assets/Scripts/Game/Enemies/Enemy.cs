@@ -12,8 +12,8 @@ public class Enemy : MonoBehaviour
     [Space]
     [SerializeField] private string[] _attackMessages;
     [SerializeField] private string[] _chargeMessages;
-    [Space]
-    [SerializeField] private int _health;
+
+    public int _Health { get; private set; }
     [SerializeField] private float _healthBarHeight;
     [SerializeField] private Transform _healthBarTarget;
 
@@ -27,11 +27,11 @@ public class Enemy : MonoBehaviour
         RestartAttackPower();
         _chargingParticles.SetActive(false);
 
-        float offset = _health * 0.5f;
-        _healthBoxes = new GameObject[_health];
+        float offset = _Health * 0.5f;
+        _healthBoxes = new GameObject[_Health];
         const int _BOX_SEPARATION = 32;
 
-        for (int i = 0; i < _health; i++)
+        for (int i = 0; i < _Health; i++)
         {
             _healthBoxes[i] = Instantiate(_healthBoxPrefab, _healthBoxesParent);
             _healthBoxes[i].transform.localPosition = _BOX_SEPARATION * (-i + offset) * Vector3.left;
@@ -62,7 +62,7 @@ public class Enemy : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        _health -= damage;
+        _Health -= damage;
         UpdateHealth();
         _animator.SetTrigger("Hit");
     }
@@ -81,6 +81,6 @@ public class Enemy : MonoBehaviour
 
     private void UpdateHealth()
     {
-        for (int i = 0; i < _healthBoxes.Length; i++) _healthBoxes[i].SetActive(i < _health);
+        for (int i = 0; i < _healthBoxes.Length; i++) _healthBoxes[i].SetActive(i < _Health);
     }
 }
