@@ -13,7 +13,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private string[] _attackMessages;
     [SerializeField] private string[] _chargeMessages;
 
-    public int _Health { get; private set; }
+    public int _Health;
     [SerializeField] private float _healthBarHeight;
     [SerializeField] private Transform _healthBarTarget;
 

@@ -1823,13 +1823,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16a392a42943d494793989393ff5be0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _director: {fileID: 959798094}
   prefabSlider: {fileID: 5436205701169863285, guid: 630b0c3e5f091a244b8ea5119083e8c8, type: 3}
   background: {fileID: 2067037517}
   background_time: {fileID: 1464192405}
   speedAppear: 10
   speedDisappear: 10
-  N_SLIDERS: 3
-  N_TIME: 10
+  N_SLIDERS: 7
+  N_TIME: 5
 --- !u!1 &980245318
 GameObject:
   m_ObjectHideFlags: 0
@@ -2708,6 +2709,7 @@ MonoBehaviour:
   - "Est\xE1 cargando su fuerza."
   - "Est\xE1 canalizando su poder."
   - "Busca c\xF3mo conseguir m\xE1s fuerza."
+  _Health: 20
   _healthBarHeight: 270
   _healthBarTarget: {fileID: 1092456009}
 --- !u!114 &1495831136

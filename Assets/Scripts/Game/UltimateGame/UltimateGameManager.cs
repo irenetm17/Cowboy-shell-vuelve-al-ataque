@@ -1,12 +1,11 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class UltimateGameManager : MonoBehaviour
 {
+    [SerializeField] private Director _director;
+
     GameObject activeSlider;
     public GameObject prefabSlider;
     public GameObject background;
@@ -84,11 +83,10 @@ public class UltimateGameManager : MonoBehaviour
 
     IEnumerator WaitTillDisapear(GameObject obj, bool win)
     {
-        yield return new WaitForSeconds(2.0f);
+        yield return null;
         obj.SetActive(false);
         gameStarted = false;
-        //Se acaba el juego. (ganar)
-        //Se acaba el juego. (ganar)
+        if(win) _director.CompleteUlti();
     }
 
     IEnumerator Appear(GameObject obj)
@@ -165,6 +163,6 @@ public class UltimateGameManager : MonoBehaviour
         background_time.SetActive(false);
         StartCoroutine(WaitTillDisapear(background, false));
         gameStarted = false;
-        //Se acaba el juego (perder).
+        _director.EndUlti();
     }
 }

@@ -60,8 +60,7 @@ public class Director : MonoBehaviour
         StopAllCoroutines();
 
         _enemy.SetAction();
-        //_isUltiEnabled = _player._Combo >= 4;
-        _isUltiEnabled = true;
+        _isUltiEnabled = _player._Combo >= 4;
 
         CreateNewSequences();
         StartCountdown();
@@ -140,7 +139,7 @@ public class Director : MonoBehaviour
 
             if (stateAttack == 2) EndActionSequence(0);
             else if (stateDefense == 2) EndActionSequence(1);
-            else if (stateUlti == 2) EndActionSequence(2);
+            else if (stateUlti == 2) EndActionSequence(-2);
         }
     }
 
@@ -168,7 +167,7 @@ public class Director : MonoBehaviour
 
         StopAllCoroutines();
 
-        if (playerState == 2) StartCoroutine(UltiAction_EVENT()); else PlayActionResult(playerState);
+        if (playerState == -2) StartUltiAction(); else PlayActionResult(playerState);
     }
 
     private void PlayActionResult(int playerState)
@@ -231,11 +230,12 @@ public class Director : MonoBehaviour
         StartActionSequence();
     }
 
-    private IEnumerator UltiAction_EVENT()
+    private void StartUltiAction()
     {
-        _ultiManager.StartGame();
+        StopAllCoroutines();
+        _isReadingKeys = false;
 
-        yield return new WaitForSeconds(_ultiManager.N_TIME);
+        _ultiManager.StartGame();
     }
 
     private IEnumerator DoSpecial_EVENT()
@@ -247,4 +247,7 @@ public class Director : MonoBehaviour
         _enemySpecial.Play(_isUltiEnabled);
         StartCoroutine(DoSpecial_EVENT());
     }
+
+    public void CompleteUlti() { EndActionSequence(2); }
+    public void EndUlti() { EndActionSequence(-1); }
 }
