@@ -79,7 +79,16 @@ public class Director : MonoBehaviour
         _attackSequence.CreateSequence(_keySequencesLength, true);
         _defenseSequence.CreateSequence(_keySequencesLength, false, _attackSequence._CurrentSequence);
         _ultiSequence.CreateSequence(_keySequencesLength, false, _attackSequence._CurrentSequence, _defenseSequence._CurrentSequence);
-        _ultiSequence.gameObject.SetActive(_isUltiEnabled);
+        if (_isUltiEnabled)
+        {
+            _ultiSequence.EnableSequence();
+            _ultiSequence.gameObject.SetActive(true);
+        }
+        else
+        {
+            _ultiSequence.DisableSequence();
+            _ultiSequence.gameObject.SetActive(false);
+        }
     }
 
     private void StartCountdown()
